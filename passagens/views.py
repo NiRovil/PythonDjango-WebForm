@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from passagens.forms import PassagemForm
 
 def index(request):
-    return render(request, 'index.html')
+    form = PassagemForm()
+    dados = {'form':form}
+    return render(request, 'index.html', dados)
