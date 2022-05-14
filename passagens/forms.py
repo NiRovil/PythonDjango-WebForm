@@ -13,3 +13,10 @@ class PassagemForm(forms.Form):
     classe_voo = forms.ChoiceField(label='Classe do Vôo', choices=tipos_passagem)
     informacoes = forms.CharField(label='Informações extras', max_length=200,widget=forms.Textarea(), required=False)
     email = forms.EmailField(label='Email', max_length=100)
+
+    def clean_origem(self):
+        origem = self.cleaned_data.get('origem')
+        if any(char.isdigit() for char in origem):
+            raise forms.ValidationError('Origem não pode conter números!')
+        else:
+            return origem

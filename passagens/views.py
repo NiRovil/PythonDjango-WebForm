@@ -9,5 +9,9 @@ def index(request):
 def retorno_consulta(request):
     if request.method == 'POST':
         form = PassagemForm(request.POST)
-        dados = {'form':form}
-        return render(request, 'consulta.html', dados)
+        if form.is_valid():
+            dados = {'form':form}
+            return render(request, 'consulta.html', dados)
+        else:
+            dados = {'form':form}
+            return render(request, 'index.html', dados)
